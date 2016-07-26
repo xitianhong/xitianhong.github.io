@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+*{padding:0;margin:0;list-style:none;}
+#div1{position:fixed;bottom:0;text-align:center;width:100%;}
+img{width:64px;}
+</style>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById('div1');
+	var aImg=oDiv.children;
+	
+	document.onmousemove=function(ev){
+		var evt=ev||event;
+		var oEvt=evt
+		var disY=evt.clientY;
+		for(var i=0;i<aImg.length;i++){
+			var a=aImg[i].offsetTop+oDiv.offsetTop+aImg[i].offsetHeight/2-evt.clientY;
+			var b=aImg[i].offsetWidth/2+aImg[i].offsetLeft-evt.clientX;
+			var c=Math.sqrt(a*a+b*b);
+			var scale=1-c/800;
+			if(scale<0.5)scale=0.5;
+			aImg[i].style.width=128*scale+'px';
+			/*var a=aImg[i].offsetLeft+aImg[i].offsetWidth/2-oEvt.clientX;	
+			var b=aImg[i].offsetTop+oDiv.offsetTop+aImg[i].offsetHeight/2-oEvt.clientY;
+			
+			var c=Math.sqrt(a*a+b*b);
+			var dis=c;
+			
+			
+			var scale = 1-c/300;		//要的1---0	//计算
+			
+			if(scale<0.5)	scale=0.5;//限定
+			
+			aImg[i].style.width=128*scale+'px';//使用*/
+			
+			
+		};
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+<img src="1.png" alt="">
+<img src="2.png" alt="">
+
+<img src="3.png" alt="">
+<img src="4.png" alt="">
+<img src="5.png" alt="">
+
+</div>
+</body>
+</html>

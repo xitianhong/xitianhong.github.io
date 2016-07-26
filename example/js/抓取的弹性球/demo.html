@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+div{width:150px;height:150px;position:absolute;left:0;top:0;background:red;border-radius:50%;}
+.box{width:3px;height:3px;position:absolute;background:#000;}
+</style>
+<script>
+window.onload=function(){
+	//var oDiv=document.getElementById('div1');
+		for(var i=0;i<10;i++){
+			setTimeout(createDiv,Math.random()*1000);
+		}	
+	
+	function createDiv(){
+		var oDiv=document.createElement('div');
+		document.body.appendChild(oDiv);
+		var x=30
+		var y=rnd(1,30)
+		var r=rnd(0,256)
+		var g=rnd(0,256)
+		var b=rnd(0,256)
+		oDiv.style.backgroundColor='rgb('+r+','+g+','+b+')';
+		drag(oDiv);
+		move(oDiv,x,y)
+	};
+	function rnd(n,m){
+		return parseInt(Math.random()*(m-n)+n);
+	};
+	function drag(oDiv){
+		oDiv.onmousedown=function(ev){
+			var evt=ev||event;
+			var disX=evt.clientX-oDiv.offsetLeft;
+			var disY=evt.clientY-oDiv.offsetTop;
+			var lastX=0;
+			var lastY=0;
+			var speedX=0;
+			var speedY=0;
+			clearInterval(oDiv.timer)
+			document.onmousemove=function(ev){
+				var evt=ev||event;
+				lastX=oDiv.offsetLeft;
+				//console.log(lastX)
+				lastY=oDiv.offsetTop;
+				oDiv.style.left=evt.clientX-disX+'px';
+				oDiv.style.top=evt.clientY-disY+'px';
+				var oBox=document.createElement('div');
+				oBox.className='box';
+				oBox.style.left=oDiv.style.left;
+				oBox.style.top=oDiv.style.top;
+				document.body.appendChild(oBox);
+				//console.log(lastX)
+				
+			};
+			document.onmouseup=function(){
+				speedX=oDiv.offsetLeft-lastX;
+				speedY=oDiv.offsetTop-lastY;
+				move(oDiv,1.5*speedX,1.5*speedY)
+				document.onmousemove=document.onmouseup=null
+			};
+			return false;
+		};
+	};
+	function move(obj,speedX,speedY){
+		obj.timer=setInterval(function(){
+			speedY+=6;
+			var l=obj.offsetLeft+speedX;
+			var t=obj.offsetTop+speedY;
+			if(t>document.documentElement.clientHeight-obj.offsetHeight){
+				t=document.documentElement.clientHeight-obj.offsetHeight;
+				speedY*=-0.8;
+				speedX*=0.8;
+				if(speedY+6>0)speedY=0;
+			};
+			if(t<0){
+				t=0;
+				speedY*=-0.8;
+			};
+			if(l>document.documentElement.clientWidth-obj.offsetWidth){
+				l=document.documentElement.clientWidth-obj.offsetWidth;
+				speedX*=-0.8;
+			};
+			if(l<0){
+				l=0;
+				speedX*=-0.8;
+			};
+			obj.style.left=l+'px';
+			obj.style.top=t+'px';
+			
+			if(Math.abs(speedX)<1)speedX=0;
+			if(Math.abs(speedY)<1)speedY=0;
+			console.log(speedX,speedY)
+			if(speedX==0&&speedY==0){
+				clearInterval(obj.timer)
+			};
+			
+		},30)
+			
+	}
+};
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

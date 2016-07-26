@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    text-align: center;
+    position: relative;
+    overflow:hidden;
+	background:url(file:///C|/Users/Msi%20PC/Desktop/snow3.jpg) no-repeat;
+	background-size:cover;
+}
+
+#btn1 {
+    width: 50px;
+    height: 60px;
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    margin-top: -30px;
+    font-weight:bold;
+}
+
+#btn2 {
+    width: 50px;
+    height: 60px;
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    margin-top: -30px;
+    font-weight:bold;
+}
+h1{
+    height:100px;
+    margin-top:60px;
+    color:#fff;
+}
+h1 i{
+    display:block;
+    border:2px solid #00009c;
+    width:300px;
+    height:40px;
+    line-height:40px;
+    margin:0 auto;
+    border-radius: 5px;
+}
+h1 span{
+    margin-top:40px;
+    height:30px;
+    display:block;
+}
+#ul1 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 50%;
+    margin-left: -160px;
+    top: 50%;
+    margin-top: -110px;
+}
+
+#ul1 li {
+    width: 360px;
+    height: 220px;
+    border: 1px solid #000;
+    background: #9e9791;
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    line-height: 220px;
+    color: #fff;
+    font-size: 30px;
+    opacity: 0;
+    transition: 0.5s all ease;
+    transform: perspective(800px) rotateY(0deg);
+}
+
+#ul1 li.l2 {
+    transform: perspective(800px) translateX(-360px) rotateY(60deg);
+    opacity: 0;
+    z-index: 1;
+}
+
+#ul1 li.l1 {
+    transform: perspective(800px) translateX(-260px) rotateY(60deg);
+    opacity: 0.6;
+    z-index: 2;
+}
+
+#ul1 li.cur {
+    opacity: 1;
+    z-index: 5;
+}
+
+#ul1 li.r1 {
+    transform: perspective(800px) translateX(260px) rotateY(-60deg);
+    opacity: 0.6;
+    z-index: 2;
+}
+
+#ul1 li.r2 {
+    transform: perspective(800px) translateX(36px) rotateY(-60deg);
+    opacity: 0;
+    z-index: 1;
+}
+
+#ul1 li a{
+    position:absolute;left:0;top:0;
+    width:100%;
+    height:100%;
+    color:#fff;
+    line-height:220px;
+    font-size:30px;
+}
+#ul1 li span {
+    border: 1px solid #000;
+    background: #2b2b2b;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(10px) scale(1, -1);
+    transform-origin: center bottom;
+    -webkit-mask: -webkit-linear-gradient(rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1));
+    opacity: 0.8;
+}
+
+.box {
+    width: 100%;
+    background: #000;
+    position: absolute;
+    top: -600px;
+    left: 0;
+}
+
+.box_ajax{
+    background:#a3248f;
+}
+.box_js{
+    background:#466f85;
+}

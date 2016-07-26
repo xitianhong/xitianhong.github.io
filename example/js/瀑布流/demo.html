@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+*{margin:0;padding:0;list-style:none;}
+#div1{width:930px;overflow:hidden;background:#ccc;}
+ul{width:300px;background:gold;margin-right:10px;float:left;}
+li{width:300px;margin-bottom:10px;background:red;}
+</style>
+<script>
+window.onload=function(){
+
+	var aUl=document.getElementsByTagName('ul');
+	var oDiv=document.getElementById('div1');
+	function createLi(){
+		var oLi=document.createElement('li');
+		oLi.style.height=parseInt(Math.random()*200+100)+'px';
+		return oLi;
+	};
+	function insertToUl(count){
+		for(var i=0;i<count;i++){
+			var minNum=99999;
+			var minIndex=-1
+			for(var j=0;j<aUl.length;j++){
+				if(minNum>aUl[j].offsetHeight){
+					minNum=aUl[j].offsetHeight;
+					minIndex=j;
+				};
+			};
+			aUl[minIndex].appendChild(createLi());
+		};
+	};
+	insertToUl(20);
+	window.onscroll=function(){
+		var scrTop=document.documentElement.scrollTop||document.body.scrollTop;
+		var clientH=document.documentElement.clientHeight;
+		if(oDiv.scrollHeight==(scrTop+clientH)){
+			insertToUl(10)
+		};
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+    <ul></ul>
+    <ul></ul>
+    <ul></ul>
+</div>
+</body>
+</html>

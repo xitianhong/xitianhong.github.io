@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- saved from url=(0094)http://lvxiaodong.sinaapp.com/demo/%E7%99%BE%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%90%9C%E7%B4%A2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>百度一下，你就知道</title>
+<link rel="shortcut icon" href="http://lvxiaodong.sinaapp.com/demo/images/favicon.ico" type="image/x-icon">
+<style>
+*{ margin:0; padding:0; list-style:none;}
+body{ text-align:center}
+img{ width:270px; height:129px;}
+.box{ position:relative; width:644px; margin:0 auto;}
+.box input{    width: 540px; height:36px; line-height:36px; text-indent:5px;}
+.box input.s_btn {
+    width: 100px;
+    height: 40px;
+	border:1px solid #ccc;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    letter-spacing: 1px;
+    background: rgb(51, 133, 255);
+    border-bottom: 1px solid rgb(45, 120, 244);
+    outline: medium;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+	cursor:pointer;
+}
+#ul1{ width:542px; border:1px solid #ccc; position:absolute; left:0; border-top:none; display:none;}
+#ul1 li{ height:30px; line-height:30px; text-align:left;text-indent:5px;}
+#ul1 li.on{ background:#eee;}
+</style>
+
+<script>
+function jsonp(url,data,success,error,cbKey,timer){
+	var cbValue='jsonp'+Math.random();
+	data[cbKey]=cbValue.replace('.','');
+	window[data[cbKey]]=function(json){
+		success(json);
+		clearInterval(timer);
+		document.getElementsByTagName('head')[0].removeChild(oSc);
+		window[data[cbKey]]=null;
+	};
+	var arr=[];
+	for(var key in data){
+		arr.push(key+'='+encodeURIComponent(data[key]));
+		
+	}
+	url=url+'?'+arr.join('&');
+	var oSc=document.createElement('script');
+	oSc.src=url;
+	document.getElementsByTagName('head')[0].appendChild(oSc);
+	clearInterval(timer);
+};
+window.onload=function(){
+	var oT=document.getElementById('t1');
+	var oUl=document.getElementById('ul1');	
+	var oBtn=document.getElementById('btn1');
+	var timer=null;
+	var oldTxt='';
+	oT.onkeydown=function(){
+		
+		clearInterval(timer)
+		//console.log(1)
+		oUl.style.display='block';
+		timer=setInterval(function(){
+			//console.log(oT.value,oldTxt)
+			var str=oT.value.replace(/\s+/g,'');
+			//console.log(2)
+			//console.log(oT.value)
+			if(oT.value.length=0||!str){
+				console.log(oT.value.length)
+				oUl.innerHTML='';
+				oUl.style.display='none';
+			}
+			if(oT.value==oldTxt)return;
+			oldTxt=oT.value;
+			if(oT.value.length>0&&str){
+				console.log(oT.value.length)
+				jsonp(
+					'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+					{wd:oT.value},
+					function(json){
+						oUl.innerHTML='';
+						
+						for(var i=0;i<json.s.length;i++){
+							var oLi=document.createElement('li');
+							oLi.innerHTML=json.s[i];
+							oLi.index=i;
+							oLi.onmouseover=function(){
+								for(var i=0;i<oUl.children.length;i++){
+									oUl.children[i].className='';	
+									//console.log(2)
+								}
+								this.className='on';
+							}
+							oLi.onclick=function(){
+								//alert(1)
+								window.open('https://www.baidu.com/s?wd='+this.innerHTML,'_self')	
+							};
+							oLi.onmouseout=function(){
+								this.className='';	
+							}
+							oUl.appendChild(oLi);
+						}
+					},
+					function(){alert('chaoshile')},
+					'cb',
+					timer
+				)
+			}
+			
+		},1)	
+	}
+	oT.onblur=function(){
+		clearInterval(timer);
+		//oUl.innerHTML='';
+		//alert(1)
+		//oUl.style.display='none'
+		setTimeout(function(){oUl.style.display='none';},120)
+			
+		//alert(1)
+	};
+	oT.onkeyup=function(){
+		clearInterval(timer)	
+	}
+	oT.onclick=function(){
+		//alert(oT.value)
+		if(oT.value){
+		oUl.style.display='block';
+		oT.onkeydown()
+		}
+	};
+	oBtn.onclick=function(){
+		window.open('https://www.baidu.com/s?wd='+oT.value,'_self')
+	}
+};
+</script>
+</head>
+
+<body>
+<div class="box">
+	<img src="bd_logo1.png"><br>
+    <input type="text" id="t1" value="利用JSONP跨域交互"><input type="submit" id="btn1" value="百度一下" class="bg s_btn btnhover">
+    <ul id="ul1"><!--
+    	<li class="on">safsdf</li>
+        <li>safsdf</li>-->
+    </ul>
+</div>
+
+
+</body></html>

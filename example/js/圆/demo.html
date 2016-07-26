@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+*{padding:0;margin:0;list-style:none;}
+#div1{height:400px;width:400px;border-radius:50%;border:1px solid red;position:absolute;left:50%;top:50%;margin-left:-200px;margin-top:-200px;}
+div.small{height:40px;width:40px;background:#FB8E15;border-radius:50%;margin-left:-20px;margin-top:-20px;position:absolute;}
+</style>
+<script>
+function d2a(n){
+	return n*Math.PI/180;
+}
+window.onload=function(){
+	var oDiv1=document.getElementById('div1');
+	var oBtn=document.getElementById('btn');
+	var aDiv=document.getElementsByClassName('small');
+	var count=5;
+	var r=oDiv1.offsetWidth/2;
+	var ready=true;
+	for(var i=0;i<count;i++){
+		oDiv=document.createElement('div');
+		oDiv.className='small';
+		
+		document.body.appendChild(oDiv)
+		setPos(oDiv,0)
+		oDiv.rotate=0;
+	};
+	function setPos(obj,d){
+		var a=Math.sin(d2a(d))*r;
+		var b=Math.cos(d2a(d))*r;
+		obj.style.left=oDiv1.offsetLeft+r+b+'px';
+		obj.style.top=oDiv1.offsetTop+r-a+'px'
+	};
+	function move(obj,target){
+		var start=obj.rotate;
+		var dis=target-start;
+		var n=0;
+		var count=10;
+		clearInterval(obj.timer)
+		obj.timer=setInterval(function(){
+			n++;
+			var a=n/count
+			var deg=start+dis*a;
+			setPos(obj,deg);
+			obj.rotate=deg;
+			if(n==count){
+				clearInterval(obj.timer)	
+			}
+		},30)
+	};
+	oBtn.onclick=function(){
+		if(ready){
+			for(var i=0;i<aDiv.length;i++){
+				move(aDiv[i],i*(90/(count-1)));	
+			}
+		}else{
+			for(var i=0;i<aDiv.length;i++){
+				move(aDiv[i],0);	
+			}
+		}
+		ready=!ready;
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1"></div>
+<input type="button" value="按钮" id="btn">
+</body>
+</html>

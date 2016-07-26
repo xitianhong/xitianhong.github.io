@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+*{margin:0;padding:0;list-style:none;}
+ul{width:650px;height:650px;border:1px solid black;margin:50px auto;position:relative;}
+li{height:150px;width:150px;background:red;margin-left:10px;float:left;margin-top:10px;}
+</style>
+<script src="move8.js"></script>
+<script>
+window.onload=function(){
+	var oUl=document.getElementById('ul1');
+	var oBtn=document.getElementById('btn');
+	var aLi=oUl.children;
+	var arr=[];
+	var timer=null;
+	var ready=true;
+	for(var i=0;i<aLi.length;i++){
+		arr.push({
+			left:aLi[i].offsetLeft,
+			top:aLi[i].offsetTop,
+			width:aLi[i].offsetWidth,
+			height:aLi[i].offsetHeight
+			})	
+		aLi[i].style.top=arr[i].top+'px';
+		aLi[i].style.left=arr[i].left+'px';
+	}
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].style.position='absolute';
+		aLi[i].style.margin=0;
+	}
+	oBtn.onclick=function(){
+		if(!ready)return;
+		ready=false;
+		var n=aLi.length;
+		/*for(var i=0;i<aLi.length;i++){
+			(function(index){
+				setTimeout(function(){
+					move(aLi[index],{top:oUl.offsetHeight,left:oUl.offsetWidth/2})
+				},30)
+			})(i)
+		}*/
+		timer=setInterval(function(){
+			n--
+			(function(index){
+				move(aLi[n],{top:oUl.offsetHeight,left:oUl.offsetWidth/2,opacity:0,width:0,height:0},{fn:function(){
+				if(index==0){
+					up()
+				}
+				}})
+			})(n)
+			
+			if(n==0){
+				console.log(1)
+				clearInterval(timer)	
+			}
+		},100)
+		function up(){
+			n=aLi.length;
+			timer=setInterval(function(){
+				n--
+				move(aLi[n],{top:arr[n].top,left:arr[n].left,opacity:1,width:arr[n].width,height:arr[n].height});
+				if(n==0){
+					clearInterval(timer)	
+					console.log(2)
+					ready=true;
+				}
+			},100)
+		}
+	}
+	
+}
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<input type="button" value="下一页" id="btn">
+</body>
+</html>

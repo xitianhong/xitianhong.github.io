@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+*{padding:0;margin:0;list-style:none;}
+#div1{width:400px;height:300px;position:relative;overflow:hidden;}
+ul{position:absolute;width:1600px;left:0;}
+ul li{float:left;height:300px;width:400px;}
+.li1{background:red;}
+.li2{background:lightblue;}
+.li3{background:green;}
+.li4{background:gold;}
+ol{position:absolute;bottom:25px;left:50%;margin-left:-140px;}
+ol li{width:60px;height:20px;border:1px solid black;float:left;margin-right:10px;}
+span{background:blue;display:block;height:100%;width:0;}
+</style>
+<script>
+function getStyle(obj,attr){
+	return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj,false)[attr]
+};
+function move(obj,json,optional){
+	optional=optional||{};
+	optional.time=optional.time||300;
+	optional.type=optional.type||'ease-out';
+	var count=Math.round(optional.time/30);
+	var n=0;
+	var start={};
+	var dis={};
+	for(var key in json){
+		start[key]=parseFloat(getStyle(obj,key));
+		dis[key]=json[key]-start[key];
+	};
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function(){
+		n++;
+		//cur=start+n*(dis/count)
+		for(var key in json){
+			switch(optional.type){
+				case 'linear':
+					var a=n/count;
+					var cur=start[key]+dis[key]*a;
+					break;
+				case 'ease-in':
+					var a=n/count;
+					var cur=start[key]+dis[key]*a*a*a;
+					break;
+				case 'ease-out':
+					var a=1-n/count;
+					var cur=start[key]+dis[key]*(1-a*a*a);
+			};
+			if(key=='opacity'){
+				obj.style.opacity=cur;
+				obj.style.filter='alpha(opacity:'+cur*100+')';
+				
+			}else{
+				obj.style[key]=cur+'px';
+			};
+		};
+		if(n==count){
+			clearInterval(obj.timer);
+			optional.fn&&optional.fn();
+		};
+	},30)
+};
+window.onload=function(){
+	var oDiv=document.getElementById('div1');
+	var oUl1=document.getElementById('ul1');
+	var aLi=oUl1.children;
+	var ol1=document.getElementById('ol1');
+	var aLi1=ol1.children;
+	var aSpan=ol1.getElementsByTagName('span');
+	var now=0;
+	var ready=true;
+	//alert(oUl1)
+	function show(){
+		move(aSpan[now],{width:60},{time:1000,fn:function(){
+			aSpan[now].style.width=0;
+				now++;
+				now%=4;
+				move(oUl1,{left:-now*400},{fn:function(){
+					if(ready)show();
+				}});
+				
+				
+		}})
+	}
+	show()
+	oDiv.onmouseover=function(){
+		ready=false;
+		clearInterval(aSpan[now].timer);
+		aSpan[now].style.width=0;
+	};
+	oDiv.onmouseout=function(){
+		ready=true;
+		show();
+	};
+};
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<ul id="ul1">
+    	<li class="li1"></li>
+        <li class="li2"></li>
+        <li class="li3"></li>
+        <li class="li4"></li>
+    </ul>
+    <ol id="ol1">
+    	<li>
+        	<span></span>
+        </li>
+        <li>
+        	<span></span>
+        </li>
+        <li>
+        	<span></span>
+        </li>
+        <li>
+        	<span></span>
+        </li>
+    </ol>
+</div>
+</body>
+</html>

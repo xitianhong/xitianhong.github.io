@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+body{font-size:60px;background:url(bg.png);color:#fff;}
+img{height:38px;width:25px;position:relative;}
+</style>
+<script src="move8.js"></script>
+<script>
+function addZero(num){
+	if(num<10){
+		return '0'+num;	
+	}else{
+		return num+'';
+	}
+};
+window.onload=function(){
+	var prev='';
+	var aImg=document.getElementsByTagName('img');
+	time()
+	setInterval(function(){
+		var arr=[];
+		var oDate=new Date();
+		var iHour=addZero(oDate.getHours());
+		var iMin=addZero(oDate.getMinutes());
+		var iSec=addZero(oDate.getSeconds());
+		var next=iHour+iMin+iSec;
+		for(var i=0;i<next.length;i++){
+			if(next.charAt(i)!=prev.charAt(i)){
+				arr.push(i);
+			};
+		};
+
+		for(var i=0;i<arr.length;i++){
+			(function(index){
+				function move(obj,iTarget){
+					var start=obj.offsetHeight;
+					var dis=iTarget-start;
+					var count=150/30;
+					var n=0;
+					clearInterval(obj.timer);
+					obj.timer=setInterval(function(){
+						n++;
+						//办事
+						var cur=start+n*dis/count;
+						obj.style.height=cur+'px';
+						obj.style.top=-(start-cur)/2+'px';
+						
+						if(n==count){
+							clearInterval(obj.timer)
+							n=0;
+							dis=start;
+							start=0;
+							time()
+							console.log('q'+prev)
+							obj.timer=setInterval(function(){
+								n++;
+								var cur=start+n*dis/count;
+								obj.style.height=cur+'px';
+								obj.style.top=-(dis-cur)/2+'px';
+								if(n==count){
+									clearInterval(obj.timer);
+								};
+							},30)
+								
+								
+						}
+					},30)
+				};
+				move(aImg[arr[index]],0)
+			})(i)
+		};
+		//prev=next;
+		//console.log('a'+prev)
+	},1000)
+	function time(){
+		var oDate=new Date();
+		var iHour=addZero(oDate.getHours());
+		var iMin=addZero(oDate.getMinutes());
+		var iSec=addZero(oDate.getSeconds());
+		var str=iHour+iMin+iSec;
+		prev=str
+		for(var i=0;i<str.length;i++){
+			aImg[i].src=str.charAt(i)+'.png'
+		}
+	};
+};
+</script>
+</head>
+
+<body>
+<img src="0.png" alt="">
+<img src="1.png" alt="">:
+<img src="2.png" alt="">
+<img src="3.png" alt="">:
+<img src="4.png" alt="">
+<img src="5.png" alt="">
+
+
+
+</body>
+</html>

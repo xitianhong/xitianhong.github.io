@@ -1,0 +1,18 @@
+/*style reset*/
+body,ul,p,h1,h2,h3,h4,h5,h6,dl,dt,dd,form,input,textarea,select{padding:0; margin:0;}
+li{list-style:none;}
+i{font-style:normal;}
+em{font-style:normal;}
+a img{border:none;}
+img{ vertical-align:top;}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+.clearfix{*zoom:1;}
+.clearfix:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.fl{float:left; display:inline;}
+.fr{float:right; display:inline;}
+body,a{font:12px/1em '微软雅黑';}

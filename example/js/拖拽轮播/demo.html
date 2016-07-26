@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+*{padding:0;margin:0;list-style:none;}
+div{height:400px;background:#ccc;position:relavtive;margin:0 auto;}
+ul{width:20000px;position:absolute;top:110px;left:0;}
+ul li{float:left;width:260px;height:179px;position:relative;}
+ul li img{width:260px;opacity:1;}
+</style>
+<script>
+window.onload=function(){
+	var oDiv=document.getElementById('div');
+	var oUl=document.getElementById('ul1');
+	var aLi=oUl.children;
+	var aImg=oUl.getElementsByTagName('img');
+	oUl.onmousedown=function(ev){
+		var evt=ev||event;
+		var disX=evt.clientX-oUl.offsetLeft;
+		document.onmousemove=function(ev){
+			var evt=ev||event;
+			var l=evt.clientX-disX;
+			if(l>oDiv.offsetWidth/2-aLi[0].offsetWidth/2)
+				l=oDiv.offsetWidth/2-aLi[0].offsetWidth/2;
+			if(l<-(aLi.length-1+0.5)*aLi[0].offsetWidth+oDiv.offsetWidth/2)
+				l=-(aLi.length-1+0.5)*aLi[0].offsetWidth+oDiv.offsetWidth/2
+			oUl.style.left=l+'px';
+			setSize()
+		};
+		document.onmouseup=function(){
+			document.onmousemove=document.onmouseup=null;	
+		};
+		return false;
+	};
+	setCenter(2)
+	setSize()
+	/*function setSize(){
+		for(var i=0;i<aLi.length;i++){
+			var dis=Math.abs(oDiv.offsetWidth/2-(aLi[i].offsetLeft+oUl.offsetLeft+aLi[i].offsetWidth/2));
+			var scale=1-dis/800;
+			
+			if(scale<0.5)scale=0.5;
+			//alert(scale);
+			aImg[i].style.width=scale*520+'px';
+			aLi[i].style.opacity=scale;
+			aLi[i].style.zIndex=parseInt(scale*10000);
+			aImg[i].style.marginLeft=-(aImg[i].offsetWidth-aLi[i].offsetWidth)/2+'px';
+			aImg[i].style.marginTop=-(aImg[i].offsetHeight-aLi[i].offsetHeight)/2+'px';
+		};
+	};*/
+	function setSize(){
+		for(var i=0;i<aLi.length;i++){
+			var dis=Math.abs(oDiv.offsetWidth/2-(oUl.offsetLeft+aLi[i].offsetLeft+aLi[0].offsetWidth/2))
+			var scale=1-dis/800;
+			if(scale<0.5)scale=0.5;
+			aImg[i].style.width=scale*520+'px';
+			aImg[i].style.marginTop=-(aImg[i].offsetHeight/2-aLi[i].offsetHeight/2)+'px';
+			aImg[i].style.marginLeft=-(aImg[i].offsetWidth/2-aLi[i].offsetWidth/2)+'px';
+			aLi[i].style.zIndex=parseInt(scale*10000);
+		};
+	};
+	function setCenter(n){
+		oUl.style.left=-(n+0.5)*aLi[0].offsetWidth+oDiv.offsetWidth/2+'px';
+	};
+	window.onresize=function(){
+		setSize()
+	};
+	
+};
+</script>
+</head>
+
+<body>
+<div id="div">
+	<ul id="ul1">
+    	<li><img src="1739248454fe29641ee8f1.jpg" alt=""></li>
+        <li><img src="4134521004fe2a83303d01.jpg" alt=""></li>
+        <li><img src="7669900194fe295f319297.jpg" alt=""></li>
+        <li><img src="9367157484fe2964d95349.jpg" alt=""></li>
+        <li><img src="9480039934ff52fc547cc5.jpg" alt=""></li>
+        <li><img src="17367597244fe29662995cb.jpg" alt=""></li>
+        <li><img src="17958872784fe2965867109.jpg" alt=""></li>
+        <li><img src="67241375551cf94212540b.jpg" alt=""></li>
+    </ul>
+</div>
+</body>
+</html>
