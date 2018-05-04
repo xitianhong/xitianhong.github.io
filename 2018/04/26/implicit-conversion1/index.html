@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-cn">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="The Abstract Equality Comparison AlgorithmThe comparison x == y, where x and y are values, produces true or false. Such a comparison is performed as follows:">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS隐式转换——双等号比较的转换规范">
+<meta property="og:url" content="https://xitianhong.github.io/2018/04/26/implicit-conversion1/index.html">
+<meta property="og:site_name" content="奚天虹">
+<meta property="og:description" content="The Abstract Equality Comparison AlgorithmThe comparison x == y, where x and y are values, produces true or false. Such a comparison is performed as follows:">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-05-03T11:10:14.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS隐式转换——双等号比较的转换规范">
+<meta name="twitter:description" content="The Abstract Equality Comparison AlgorithmThe comparison x == y, where x and y are values, produces true or false. Such a comparison is performed as follows:">
+
+
+
+
+
+
+  <link rel="canonical" href="https://xitianhong.github.io/2018/04/26/implicit-conversion1/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JS隐式转换——双等号比较的转换规范 | 奚天虹</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">奚天虹</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">我的博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xitianhong.github.io/2018/04/26/implicit-conversion1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="奚天虹">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奚天虹">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS隐式转换——双等号比较的转换规范
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-26 19:29:39" itemprop="dateCreated datePublished" datetime="2018-04-26T19:29:39+08:00">2018-04-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-03 19:10:14" itemprop="dateModified" datetime="2018-05-03T19:10:14+08:00">2018-05-03</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="The-Abstract-Equality-Comparison-Algorithm"><a href="#The-Abstract-Equality-Comparison-Algorithm" class="headerlink" title="The Abstract Equality Comparison Algorithm"></a>The Abstract Equality Comparison Algorithm</h1><p>The comparison x == y, where x and y are values, produces true or false. Such a comparison is performed as follows:</p>
+<a id="more"></a>
+<p>1.If Type(x) is different from Type(y), go to step 14.</p>
+<blockquote>
+<font color="red"><strong>如果x和y是不同类型 跳转到第14步开</strong></font>
+</blockquote>
+<p>2.If Type(x) is Undefined, return true.</p>
+<blockquote>
+<p><strong><font color="red">x和y都是undefined类型 返回true</font></strong></p>
+</blockquote>
+<p>3.If Type(x) is Null, return true.</p>
+<blockquote>
+<p><strong><font color="red">x和y都是null类型 返回true</font></strong></p>
+</blockquote>
+<p>4.If Type(x) is not Number, go to step 11.</p>
+<blockquote>
+<p><strong><font color="red">如果x和y都不是是number类型(但是是同类型) 跳到第11步开始</font></strong></p>
+</blockquote>
+<p>5.If x is NaN, return false.</p>
+<blockquote>
+<p><strong><font color="red">如果x是NaN 返回false</font></strong></p>
+</blockquote>
+<p>6.If y is NaN, return false.</p>
+<blockquote>
+<p><strong><font color="red">如果y是NaN 返回false</font></strong></p>
+</blockquote>
+<p>7.If x is the same number value as y, return true.</p>
+<blockquote>
+<p><strong><font color="red">如果x与y的数值相同，返回true</font></strong></p>
+</blockquote>
+<p>8.If x is +0 and y is -0, return true.</p>
+<blockquote>
+<p><strong><font color="red">如果x是+0 并且 y是-0，返回true</font></strong></p>
+</blockquote>
+<ol start="9">
+<li>If x is -0 and y is +0, return true.</li>
+</ol>
+<blockquote>
+<p><strong><font color="red">如果x是-0 并且 y是+0，返回true</font></strong></p>
+</blockquote>
+<ol start="10">
+<li>Return false.</li>
+</ol>
+<blockquote>
+<p><strong><font color="red">其余情况返回false</font></strong></p>
+</blockquote>
+<h4 id="第11步开始-是从上面跳转过来的-属于相同类型-但都不是number类型"><a href="#第11步开始-是从上面跳转过来的-属于相同类型-但都不是number类型" class="headerlink" title="第11步开始 是从上面跳转过来的 属于相同类型 但都不是number类型"></a>第11步开始 是从上面跳转过来的 属于相同类型 但都不是number类型</h4><p>11.If Type(x) is String, then return true if x and y are exactly the same sequence of characters (same length and same characters in corresponding positions). Otherwise, return false.</p>
+<blockquote>
+<p><strong><font color="red">如果x和y是相同的字符串（长度和对应位置上的字符相同）返回true,否则false</font></strong></p>
+</blockquote>
+<p>12.If Type(x) is Boolean, return true if x and y are both true or both false. Otherwise, return false.</p>
+<blockquote>
+<p><strong><font color="red">如果x和y都是布尔值，并且都是true或者false 返回true，否则返回false</font></strong></p>
+</blockquote>
+<p>13.Return true if x and y refer to the same object or if they refer to objects joined to each other (see 13.1.2). Otherwise, return false.</p>
+<blockquote>
+<p><strong><font color="red">如果x和y指向的是同一对象 返回true,否则返回false</font></strong></p>
+</blockquote>
+<h4 id="第14步开始是类型不同的比较-依次按照以下顺序进行判断"><a href="#第14步开始是类型不同的比较-依次按照以下顺序进行判断" class="headerlink" title="第14步开始是类型不同的比较 依次按照以下顺序进行判断"></a>第14步开始是类型不同的比较 依次按照以下顺序进行判断</h4><p>14.If x is null and y is undefined, return true.</p>
+<blockquote>
+<p><strong><font color="red">如果x为null y为undefined 返回true,否则返回false</font></strong></p>
+</blockquote>
+<p>15.If x is undefined and y is null, return true.</p>
+<blockquote>
+<p><strong><font color="red">如果x为undefined y为null 返回true,否则返回false</font></strong></p>
+</blockquote>
+<p>16.If Type(x) is Number and Type(y) is String, return the result of the comparison x == ToNumber(y).</p>
+<blockquote>
+<p><strong><font color="red">如果x的类型为Number并且y的类型是string，就返回x == ToNumber(y)的结果</font></strong></p>
+</blockquote>
+<p>17.If Type(x) is String and Type(y) is Number, return the result of the comparison ToNumber(x)== y.</p>
+<blockquote>
+<p><strong><font color="red">如果x的类型为string并且y的类型是number，就返回ToNumber(x) == y的结果</font></strong></p>
+</blockquote>
+<p>18.If Type(x) is Boolean, return the result of the comparison ToNumber(x)== y.</p>
+<blockquote>
+<p><strong><font color="red">如果x为布尔值，就返回ToNumber(x) == y的结果</font></strong></p>
+</blockquote>
+<p>19.If Type(y) is Boolean, return the result of the comparison x == ToNumber(y).</p>
+<blockquote>
+<p><strong><font color="red">如果y为布尔值，就返回ToNumber(y) == x的结果</font></strong></p>
+</blockquote>
+<p>20.If Type(x) is either String or Number and Type(y) is Object, return the result of the comparison x == ToPrimitive(y).</p>
+<blockquote>
+<p><strong><font color="red">如果x的类型是string或者number并且y的类型是object，那么返回x == ToPrimitive(y)的结果</font></strong></p>
+</blockquote>
+<p>21.If Type(x) is Object and Type(y) is either String or Number, return the result of the comparison ToPrimitive(x)== y.</p>
+<blockquote>
+<p><strong><font color="red">如果y的类型是string或者number并且x的类型是object，那么返回ToPrimitive(x) == y的结果</font></strong></p>
+</blockquote>
+<p>22.Return false.</p>
+<blockquote>
+<p><strong><font color="red">否则返回false</font></strong></p>
+</blockquote>
+<h2 id="ToNumber"><a href="#ToNumber" class="headerlink" title="ToNumber"></a>ToNumber</h2><p>The operator ToNumber converts its argument to a value of type Number according to the following table:</p>
+<blockquote>
+<p><strong><font color="red">ToNumber操作会根据以下表格转换参数为一个number类型的值</font></strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Input Type（参数类型）</th>
+<th>Result（结果）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Undefined</td>
+<td>NaN</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>+0</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>The result is 1 if the argument is true. The result is +0 if the argument is false. <font color="red">true为1 false为0)</font></td>
+</tr>
+<tr>
+<td>Number</td>
+<td>The result equals the input argument (no conversion). <font color="red">不转换</font></td>
+</tr>
+<tr>
+<td>String</td>
+<td>See grammar and note below.<strong> <font color="red">参见下面的语法和说明。</font></strong></td>
+</tr>
+<tr>
+<td>Object</td>
+<td>Apply the following steps:  <strong><font color="red">应用以下步骤</font></strong></td>
+</tr>
+<tr>
+<td></td>
+<td>1. Call ToPrimitive(input argument, hint Number). <strong><font color="red">调用ToPrimitive(input argument, hint Number)</font></strong></td>
+</tr>
+<tr>
+<td></td>
+<td>2. Call ToNumber(Result(1)).<font color="red">调用ToNumber(Result(1))</font></td>
+</tr>
+<tr>
+<td></td>
+<td>3. Return Result(2). <strong><font color="red">返回第二步的结果</font></strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="ToPrimitive"><a href="#ToPrimitive" class="headerlink" title="ToPrimitive"></a>ToPrimitive</h2><p>The operator ToPrimitive takes a Value argument and an optional argument PreferredType. The operator ToPrimitive converts its value argument to a non-Object type. If an object is capable of converting to more than one primitive type, it may use the optional hint PreferredType to favour that type. Conversion occurs according to the following table:</p>
+<table>
+<thead>
+<tr>
+<th>Input Type</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Undefined</td>
+<td>The result equals the input argument (no conversion).</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>The result equals the input argument (no conversion).</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>The result equals the input argument (no conversion).</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>The result equals the input argument (no conversion).</td>
+</tr>
+<tr>
+<td>String</td>
+<td>The result equals the input argument (no conversion).</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>Return a default value for the Object. The default value of an object is retrieved by calling the [[DefaultValue]] internal method of the object, passing the optional hint PreferredType. The behaviour of the [[DefaultValue]] internal method is defined by this specification for all native ECMAScript objects in 8.12.8.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="DefaultValue-hint"><a href="#DefaultValue-hint" class="headerlink" title="[[DefaultValue]] (hint)"></a>[[DefaultValue]] (hint)</h2><p>When the [[DefaultValue]] internal method of O is called with hint String, the following steps are taken:</p>
+<blockquote>
+<font color="red"><strong>使用hint</strong> String 调用对象的内部方法[[DefaultValue]]时，将采取以下步骤:</font>
+</blockquote>
+<p>Let toString be the result of calling the [[Get]] internal method of object O with argument “toString”.</p>
+<blockquote>
+<font color="red"><strong>获取对象的toString方法</strong></font>
+</blockquote>
+<p>If IsCallable(toString) is true then,</p>
+<blockquote>
+<font color="red"><strong>如果可以调用tostring方法</strong> 那么:</font>
+</blockquote>
+<ul>
+<li>Let str be the result of calling the [[Call]] internal method of toString, with O as the this value and an empty argument list.</li>
+</ul>
+<blockquote>
+<p><strong><font color="red">调用tostring内部方法对象O作为this的值 并且传递空的参数列表,结果为str</font></strong></p>
+</blockquote>
+<ul>
+<li>If str is a primitive value, return str.</li>
+</ul>
+<blockquote>
+<p><strong><font color="red">如果str是一个原始值 就返回str； 结束；</font></strong></p>
+</blockquote>
+<p>Let valueOf be the result of calling the [[Get]] internal method of object O with argument “valueOf”.</p>
+<blockquote>
+<font color="red"><strong>获取对象的valueOf内部方法</strong></font>
+</blockquote>
+<p>If IsCallable(valueOf) is true then,&gt;</p>
+<blockquote>
+<font color="red"><strong>如果可以调用valueof</strong></font>
+</blockquote>
+<ul>
+<li>Let val be the result of calling the [[Call]] internal method of valueOf, with O as the this value and an empty argument list.</li>
+</ul>
+<blockquote>
+<p><strong><font color="red">调用valueof方法 内部this指向对象O，并且传入空的参数列表得到返回值val</font></strong></p>
+</blockquote>
+<ul>
+<li>If val is a primitive value, return val.</li>
+</ul>
+<blockquote>
+<p><strong><font color="red">如果val是一个原始值 那么返回val；结束；</font></strong></p>
+</blockquote>
+<p>Throw a TypeError exception.</p>
+<blockquote>
+<p><strong><font color="red">以上步骤都没有获得结果 抛出类型错误</font></strong></p>
+</blockquote>
+<p>When the [[DefaultValue]] internal method of O is called with hint Number, the following steps are taken:</p>
+<blockquote>
+<p><strong><font color="red">如果调用[[DefaultValue]]时传入的是hint Number,则采用以下步骤</font></strong></p>
+</blockquote>
+<p>Let valueOf be the result of calling the [[Get]] internal method of object O with argument “valueOf”.</p>
+<blockquote>
+<p><strong><font color="red">获取对象的valueof方法</font></strong></p>
+</blockquote>
+<p>If IsCallable(valueOf) is true then,</p>
+<blockquote>
+<p><strong><font color="red">如果能调用valueof方法</font></strong></p>
+</blockquote>
+<ul>
+<li>Let val be the result of calling the [[Call]] internal method of valueOf, with O as the this value and an empty argument list.</li>
+</ul>
+<blockquote>
+<p><strong><font color="red">调用valueof this指向该对象 传入空参数列表，得到返回结果val</font></strong></p>
+</blockquote>
+<ul>
+<li>If val is a primitive value, return val.</li>
+</ul>
+<blockquote>
+<p><strong><font color="red">如果val是原始值，则返回val</font></strong></p>
+</blockquote>
+<p>Let toString be the result of calling the [[Get]] internal method of object O with argument “toString”.</p>
+<blockquote>
+<p><strong><font color="red">获取tostring方法</font></strong></p>
+</blockquote>
+<p>If IsCallable(toString) is true then,</p>
+<blockquote>
+<p><strong><font color="red">如果能调用tostring方法</font></strong></p>
+</blockquote>
+<ul>
+<li>Let str be the result of calling the [[Call]] internal method of toString, with O as the this value and an empty argument list.</li>
+</ul>
+<blockquote>
+<p><strong><font color="red">调用tostring方法，this指向该对象，传入空参数列表，获得返回结果str</font></strong></p>
+</blockquote>
+<ul>
+<li>If str is a primitive value, return str.</li>
+</ul>
+<blockquote>
+<p><strong><font color="red">如果str是一个原始值，则返回str</font></strong></p>
+</blockquote>
+<p>Throw a TypeError exception.</p>
+<blockquote>
+<p><strong><font color="red">以上步骤都没有获得原始值 抛出类型错误</font></strong></p>
+</blockquote>
+<p>When the [[DefaultValue]] internal method of O is called with no hint, then it behaves as if the hint were Number, unless O is a Date object (see 15.9.6), in which case it behaves as if the hint were String.</p>
+<blockquote>
+<p><strong><font color="red">当调用[[DefaultValue]] 内部方法时没有传入hint,那么他的行为就像是传入了hint Number一样,除非对象O是一个日期对象，在这种情况下 他的行为就像是hint String</font></strong></p>
+</blockquote>
+<p>The above specification of [[DefaultValue]] for native objects can return only primitive values. If a host object implements its own [[DefaultValue]] internal method, it must ensure that its [[DefaultValue]] internal method can return only primitive values.</p>
+<blockquote>
+<p><strong><font color="red">[[DefaultValue]]方法只能返回原始值</font></strong></p>
+</blockquote>
+<h4 id="NOTE-1-Given-the-above-definition-of-equality"><a href="#NOTE-1-Given-the-above-definition-of-equality" class="headerlink" title="NOTE 1 Given the above definition of equality:"></a>NOTE 1 Given the above definition of equality:</h4><p>String comparison can be forced by: “” + a == “” + b.</p>
+<p>Numeric comparison can be forced by: +a == +b.</p>
+<p>Boolean comparison can be forced by: !a == !b.</p>
+<h4 id="NOTE-2-The-equality-operators-maintain-the-following-invariants"><a href="#NOTE-2-The-equality-operators-maintain-the-following-invariants" class="headerlink" title="NOTE 2 The equality operators maintain the following invariants:"></a>NOTE 2 The equality operators maintain the following invariants:</h4><p>A != B is equivalent to !(A == B).</p>
+<p>A == B is equivalent to B == A, except in the order of evaluation of A and B.</p>
+<h4 id="NOTE-3-The-equality-operator-is-not-always-transitive-For-example-there-might-be-two-distinct-String-objects-each-representing-the-same-String-value-each-String-object-would-be-considered-equal-to-the-String-value-by-the-operator-but-the-two-String-objects-would-not-be-equal-to-each-other-For-Example"><a href="#NOTE-3-The-equality-operator-is-not-always-transitive-For-example-there-might-be-two-distinct-String-objects-each-representing-the-same-String-value-each-String-object-would-be-considered-equal-to-the-String-value-by-the-operator-but-the-two-String-objects-would-not-be-equal-to-each-other-For-Example" class="headerlink" title="NOTE 3 The equality operator is not always transitive. For example, there might be two distinct String objects, each representing the same String value; each String object would be considered equal to the String value by the == operator, but the two String objects would not be equal to each other. For Example:"></a>NOTE 3 The equality operator is not always transitive. For example, there might be two distinct String objects, each representing the same String value; each String object would be considered equal to the String value by the == operator, but the two String objects would not be equal to each other. For Example:</h4><p>new String(“a”) == “a” and “a” == new String(“a”)are both true.</p>
+<p>new String(“a”) == new String(“a”) is false.</p>
+<h4 id="NOTE-4-Comparison-of-Strings-uses-a-simple-equality-test-on-sequences-of-code-unit-values-There-is-no-attempt-to-use-the-more-complex-semantically-oriented-definitions-of-character-or-string-equality-and-collating-order-defined-in-the-Unicode-specification-Therefore-Strings-values-that-are-canonically-equal-according-to-the-Unicode-standard-could-test-as-unequal-In-effect-this-algorithm-assumes-that-both-Strings-are-already-in-normalised-form"><a href="#NOTE-4-Comparison-of-Strings-uses-a-simple-equality-test-on-sequences-of-code-unit-values-There-is-no-attempt-to-use-the-more-complex-semantically-oriented-definitions-of-character-or-string-equality-and-collating-order-defined-in-the-Unicode-specification-Therefore-Strings-values-that-are-canonically-equal-according-to-the-Unicode-standard-could-test-as-unequal-In-effect-this-algorithm-assumes-that-both-Strings-are-already-in-normalised-form" class="headerlink" title="NOTE 4 Comparison of Strings uses a simple equality test on sequences of code unit values. There is no attempt to use the more complex, semantically oriented definitions of character or string equality and collating order defined in the Unicode specification. Therefore Strings values that are canonically equal according to the Unicode standard could test as unequal. In effect this algorithm assumes that both Strings are already in normalised form."></a>NOTE 4 Comparison of Strings uses a simple equality test on sequences of code unit values. There is no attempt to use the more complex, semantically oriented definitions of character or string equality and collating order defined in the Unicode specification. Therefore Strings values that are canonically equal according to the Unicode standard could test as unequal. In effect this algorithm assumes that both Strings are already in normalised form.</h4>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/regular/" rel="next" title="正则规则">
+                <i class="fa fa-chevron-left"></i> 正则规则
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">奚天虹</p>
+              <p class="site-description motion-element" itemprop="description">奚天虹的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Abstract-Equality-Comparison-Algorithm"><span class="nav-number">1.</span> <span class="nav-text">The Abstract Equality Comparison Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第11步开始-是从上面跳转过来的-属于相同类型-但都不是number类型"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">第11步开始 是从上面跳转过来的 属于相同类型 但都不是number类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第14步开始是类型不同的比较-依次按照以下顺序进行判断"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">第14步开始是类型不同的比较 依次按照以下顺序进行判断</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ToNumber"><span class="nav-number">1.1.</span> <span class="nav-text">ToNumber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ToPrimitive"><span class="nav-number">1.2.</span> <span class="nav-text">ToPrimitive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DefaultValue-hint"><span class="nav-number">1.3.</span> <span class="nav-text">[[DefaultValue]] (hint)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NOTE-1-Given-the-above-definition-of-equality"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">NOTE 1 Given the above definition of equality:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NOTE-2-The-equality-operators-maintain-the-following-invariants"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">NOTE 2 The equality operators maintain the following invariants:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NOTE-3-The-equality-operator-is-not-always-transitive-For-example-there-might-be-two-distinct-String-objects-each-representing-the-same-String-value-each-String-object-would-be-considered-equal-to-the-String-value-by-the-operator-but-the-two-String-objects-would-not-be-equal-to-each-other-For-Example"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">NOTE 3 The equality operator is not always transitive. For example, there might be two distinct String objects, each representing the same String value; each String object would be considered equal to the String value by the == operator, but the two String objects would not be equal to each other. For Example:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NOTE-4-Comparison-of-Strings-uses-a-simple-equality-test-on-sequences-of-code-unit-values-There-is-no-attempt-to-use-the-more-complex-semantically-oriented-definitions-of-character-or-string-equality-and-collating-order-defined-in-the-Unicode-specification-Therefore-Strings-values-that-are-canonically-equal-according-to-the-Unicode-standard-could-test-as-unequal-In-effect-this-algorithm-assumes-that-both-Strings-are-already-in-normalised-form"><span class="nav-number">1.3.0.4.</span> <span class="nav-text">NOTE 4 Comparison of Strings uses a simple equality test on sequences of code unit values. There is no attempt to use the more complex, semantically oriented definitions of character or string equality and collating order defined in the Unicode specification. Therefore Strings values that are canonically equal according to the Unicode standard could test as unequal. In effect this algorithm assumes that both Strings are already in normalised form.</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">奚天虹</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
