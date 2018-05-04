@@ -110,7 +110,7 @@
 <meta property="og:site_name" content="奚天虹">
 <meta property="og:description" content="i {font-style:normal; color:red; font-weight: 500}    h1 {font-size: 24px;}    h2{font-size: 18px;} 常用字符操作: strObj.charAt(index)    返回    index对应位置的字符  strObj.indexOf(字符|正则)    返回下标 没有则返回-1  strOb">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-04T04:40:08.000Z">
+<meta property="og:updated_time" content="2018-05-04T05:24:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则规则">
 <meta name="twitter:description" content="i {font-style:normal; color:red; font-weight: 500}    h1 {font-size: 24px;}    h2{font-size: 18px;} 常用字符操作: strObj.charAt(index)    返回    index对应位置的字符  strObj.indexOf(字符|正则)    返回下标 没有则返回-1  strOb">
@@ -345,7 +345,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-04 12:40:08" itemprop="dateModified" datetime="2018-05-04T12:40:08+08:00">2018-05-04</time>
+                <time title="修改时间：2018-05-04 13:24:54" itemprop="dateModified" datetime="2018-05-04T13:24:54+08:00">2018-05-04</time>
               
             
           </span>
@@ -474,16 +474,21 @@
 <h1 id="选项-xx-选项"><a href="#选项-xx-选项" class="headerlink" title="选项: /xx/选项"></a>选项: /xx/选项</h1><p>i:    忽略大小写</p>
 <p>g:    全局    global</p>
 <p>m:    多行匹配    muti-line</p>
-<p>m: 表示多行模式，即在到达一行文本末尾时还会继续查找下一行中是否存在于模式匹配的项;会修改^和$的行为。<br>默认情况下（即不加m修饰符时），^和$匹配字符串的开始处和结尾处，加上m修饰符以后，^和$还会匹配行首和行尾，<br>即^和$会识别换行符（\n）</p>
+<p>m: 表示多行模式，即在到达一行文本末尾时还会继续查找下一行中是否存在于模式匹配的项;会修改 ^ 和 $的行为。<br>默认情况下（即不加m修饰符时），^ 和 $匹配字符串的开始处和结尾处，加上m修饰符以后，^ 和 $还会匹配行首和行尾，<br>即^ 和 $会识别换行符（\n）</p>
 <p>例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/world$/.test(<span class="string">'hello world\n'</span>) </span><br><span class="line"><span class="comment">// false $匹配的是结尾处 所以world 和 world\n不对应</span></span><br><span class="line"></span><br><span class="line">/world$/m.test(<span class="string">'hello world\n'</span>) </span><br><span class="line"><span class="comment">// true $识别\n, $和\n相匹配</span></span><br></pre></td></tr></table></figure></p>
 <hr>
-<h1 id="量词："><a href="#量词：" class="headerlink" title="量词："></a>量词：</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+: 匹配<span class="number">1</span>个或多个; </span><br><span class="line">	/ab+c/.test(<span class="string">'abc'</span>) <span class="comment">//true</span></span><br><span class="line">	/ab+c/.test(<span class="string">'abbbbc'</span>) <span class="comment">//true</span></span><br><span class="line">	/ab+c/.test(<span class="string">'ac'</span>) <span class="comment">//false</span></span><br><span class="line">*: 匹配任意个数;</span><br><span class="line">	/ab*c/.test(<span class="string">'abc'</span>) <span class="comment">//true</span></span><br><span class="line">	/ab*c/.test(<span class="string">'abbbbc'</span>) <span class="comment">//true</span></span><br><span class="line">	/ab*c/.test(<span class="string">'ac'</span>) <span class="comment">//true</span></span><br><span class="line">&#123;n, m&#125;： 匹配前面的字符或者分组n - m个</span><br><span class="line">	/ab&#123;<span class="number">1</span>,<span class="number">3</span>&#125;c/.test(<span class="string">'a'</span>) <span class="comment">//true</span></span><br><span class="line">	/ab&#123;<span class="number">1</span>,<span class="number">3</span>&#125;c/.test(<span class="string">'abbc'</span>) <span class="comment">// true</span></span><br><span class="line">	/ab&#123;<span class="number">1</span>,<span class="number">3</span>&#125;c/.test(<span class="string">'abbbc'</span>) <span class="comment">// true</span></span><br><span class="line">	/ab&#123;<span class="number">1</span>,<span class="number">3</span>&#125;c/.test(<span class="string">'abbbbc'</span>) <span class="comment">// false</span></span><br><span class="line">&#123;n&#125;: 匹配前面字符或者分组n个</span><br></pre></td></tr></table></figure>
+<h1 id="量词："><a href="#量词：" class="headerlink" title="量词："></a>量词：</h1><p>+: 匹配1个或多个;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/ab+c/.test(<span class="string">'abc'</span>) <span class="comment">//true</span></span><br><span class="line">/ab+c/.test(<span class="string">'abbbbc'</span>) <span class="comment">//true</span></span><br><span class="line">/ab+c/.test(<span class="string">'ac'</span>) <span class="comment">//false</span></span><br></pre></td></tr></table></figure></p>
+<p>*: 匹配任意个数;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/ab*c/.test(<span class="string">'abc'</span>) <span class="comment">//true</span></span><br><span class="line">/ab*c/.test(<span class="string">'abbbbc'</span>) <span class="comment">//true</span></span><br><span class="line">/ab*c/.test(<span class="string">'ac'</span>) <span class="comment">//true</span></span><br></pre></td></tr></table></figure></p>
+<p>{n, m}： 匹配前面的字符或者分组n - m个<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/ab&#123;<span class="number">1</span>,<span class="number">3</span>&#125;c/.test(<span class="string">'a'</span>) <span class="comment">//true</span></span><br><span class="line">/ab&#123;<span class="number">1</span>,<span class="number">3</span>&#125;c/.test(<span class="string">'abbc'</span>) <span class="comment">// true</span></span><br><span class="line">/ab&#123;<span class="number">1</span>,<span class="number">3</span>&#125;c/.test(<span class="string">'abbbc'</span>) <span class="comment">// true</span></span><br><span class="line">/ab&#123;<span class="number">1</span>,<span class="number">3</span>&#125;c/.test(<span class="string">'abbbbc'</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<p>{n}: 匹配前面字符或者分组n个<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/(abc)&#123;<span class="number">3</span>&#125;/.test(<span class="string">'abc'</span>) <span class="comment">//false</span></span><br><span class="line">/(abc)&#123;<span class="number">3</span>&#125;/.test(<span class="string">'abcabcabc'</span>) <span class="comment">//true</span></span><br></pre></td></tr></table></figure></p>
 <hr>
-<h1 id="方括号"><a href="#方括号" class="headerlink" title="方括号:"></a>方括号:</h1><pre><code>[abc] 里面的内容任选一个    或a或b或c
-放在括号里面的都是被匹配的内容
--    n-m    n到m    [0-9]    [a-z]    []
-^    出现在[]里面且在最前面，代表的是排除,这里不含方括号里的内容
-[]    里面分不清要不要加\时，就都加
+<h1 id="方括号"><a href="#方括号" class="headerlink" title="方括号:"></a>方括号:</h1><p>[abc] 里面的内容任选一个    或a或b或c</p>
+<p>放在括号里面的都是被匹配的内容</p>
+<pre><code>-符号:   n-m n到m    [0-9]0到9    [a-z]a到z [0-9a-zA-Z]数字和字母
+
+^符号:    出现在[]里面且在最前面，代表的是排除,这里不含方括号里的内容
+
+[]符号里面分不清要不要加\时，就都加
 </code></pre><hr>
 <h1 id="分组："><a href="#分组：" class="headerlink" title="分组："></a>分组：</h1><p>(abc)    代表abc是一组    必须一起出现</p>
 <pre><code>(abc){3} // 表示abc需要同时连续出现3次
@@ -493,59 +498,24 @@
 /b/.test(s)  // false
 /b|a/.test(s) // true
 </code></pre><hr>
-<h1 id="修饰："><a href="#修饰：" class="headerlink" title="修饰："></a>修饰：</h1><pre><code>^    行首
-$    行尾
-\b    单词边界    boundary    
-    能都把单词分开的都是单词边界    一个单词两侧都有边界
-    空格 - , . ，。等标点符号都算单词边界 _下划线不算
-    /a\bname\bc/.test(&apos;a name c&apos;) // false 因为\b并不是匹配空格 而是单词的边界
-    /a\s\bname\b\sc/.test(&apos;a name c&apos;) // true
-    /a-\bname\b,c/.test(&apos;a-name,c&apos;) // true
-    /a_\bname\b_c/.test(&apos;a_name_c&apos;) // false
-</code></pre><hr>
-<h1 id="公共特性："><a href="#公共特性：" class="headerlink" title="公共特性："></a>公共特性：</h1><pre><code>1.    正则很少有方法，几乎都用字符的方法
-2.    正则默认情况从左到右一个一个的匹配
-3.    正则默认情况下匹配一次
-4.    g全局匹配（左到右) 会匹配多次
-5.    推荐一直都加 ^xxxx$
-</code></pre><hr>
-<h1 id="match和exec方法"><a href="#match和exec方法" class="headerlink" title="match和exec方法"></a>match和exec方法</h1><p>match：是字符串的方法<br>exec: 是正则的方法  如果找到了匹配的文本，则返回一个结果数组。否则，返回 null。</p>
+<h1 id="修饰："><a href="#修饰：" class="headerlink" title="修饰："></a>修饰：</h1><p>^    行首</p>
+<p>$    行尾</p>
+<p>\b    单词边界    boundary<br>能都把单词分开的都是单词边界    一个单词两侧都有边界<br>空格 - , . ，。等标点符号都算单词边界 _下划线不算</p>
+<p>例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/a\bname\bc/.test(<span class="string">'a name c'</span>) <span class="comment">// false 因为\b并不是匹配空格 而是单词的边界</span></span><br><span class="line">/a\s\bname\b\sc/.test(<span class="string">'a name c'</span>) <span class="comment">// true</span></span><br><span class="line">/a-\bname\b,c/.test(<span class="string">'a-name,c'</span>) <span class="comment">// true</span></span><br><span class="line">/a_\bname\b_c/.test(<span class="string">'a_name_c'</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
 <hr>
+<h1 id="match和exec方法"><a href="#match和exec方法" class="headerlink" title="match和exec方法"></a>match和exec方法</h1><p>match：是字符串的方法<br>exec: 是正则的方法  如果找到了匹配的文本，则返回一个结果数组。否则，返回 null。</p>
 <blockquote>
 <h2 id="正则中没有g的情况："><a href="#正则中没有g的情况：" class="headerlink" title="正则中没有g的情况："></a>正则中没有g的情况：</h2></blockquote>
-<pre><code>reg.exec(str) 和 str.match(reg) 2者的返回值是相同的
-返回值都是： [正则完整匹配到的内容,(匹配到的分组内容,分组内容,分组内容...,),index,输入的字符串]
-var reg = /ice(\d)(\d)(\d)/;
-var str = &apos;ice1234ice3456ice5678&apos;;
-reg.exec(str)
-返回[&quot;ice123&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, index: 0, input: &quot;ice1234ice3456ice5678&quot;, groups: undefined]
-str.match(reg)
-返回[&quot;ice123&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, index: 0, input: &quot;ice1234ice3456ice5678&quot;, groups: undefined]
-</code></pre><blockquote>
+<p>reg.exec(str) 和 str.match(reg) 2者的返回值是相同的<br>返回值都是： [正则完整匹配到的内容,(匹配到的分组内容,分组内容,分组内容…,),index,输入的字符串]<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/ice(\d)(\d)(\d)/</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'ice1234ice3456ice5678'</span>;</span><br><span class="line">reg.exec(str)</span><br><span class="line"><span class="comment">// 返回["ice123", "1", "2", "3", index: 0, input: "ice1234ice3456ice5678", groups: undefined]</span></span><br><span class="line">str.match(reg)</span><br><span class="line"><span class="comment">// 返回["ice123", "1", "2", "3", index: 0, input: "ice1234ice3456ice5678", groups: undefined]</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
 <h2 id="正则中如果有g的情况-："><a href="#正则中如果有g的情况-：" class="headerlink" title="正则中如果有g的情况 ："></a>正则中如果有g的情况 ：</h2></blockquote>
-<pre><code>exec: 
-    正则对象会有一个lastIndex属性,初始值为0；
-    正则会从lastIndex指定的位置开始匹配字符串,如果匹配到内容,会把lastIndex设置为匹配到的字符串的最后一个字符的下一个位置；
-    下次再调用reg.exec(str)的时候,就从lastIndex开始匹配;
-    当 exec() 再也找不到匹配的文本时，它将返回 null，并把 lastIndex 属性重置为 0。再调用的时候又从0开始匹配
-    var reg = /ice(\d)(\d)(\d)/g;
-    var str = &apos;ice1234ice3456ice5678&apos;;
-    reg.exec(str)
-    // [&quot;ice123&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, index: 0, input: &quot;ice1234ice3456ice5678&quot;, groups: undefined]
-    reg.exec(str)
-    // [&quot;ice345&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, index: 7, input: &quot;ice1234ice3456ice5678&quot;, groups: undefined]
-    reg.exec(str)
-    // [&quot;ice567&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, index: 14, input: &quot;ice1234ice3456ice5678&quot;, groups: undefined]
-    reg.exec(str)
-    // null
-    reg.exec(str)
-    //...从新开始匹配
-
-match: 
-    进行全局匹配 并把匹配到的所有子串作为数组内容返回 如果没有匹配到 返回null
-    str.match(reg)
-   // [&quot;ice123&quot;, &quot;ice345&quot;, &quot;ice567&quot;] 没有分组内容 也没有index和input属性
-</code></pre><hr>
+<blockquote>
+<h3 id="exec方法"><a href="#exec方法" class="headerlink" title="exec方法:"></a>exec方法:</h3></blockquote>
+<p>正则对象会有一个lastIndex属性,初始值为0；<br>正则会从lastIndex指定的位置开始匹配字符串,如果匹配到内容,会把lastIndex设置为匹配到的字符串的最后一个字符的下一个位置；<br>下次再调用reg.exec(str)的时候,就从lastIndex开始匹配;<br>当 exec() 再也找不到匹配的文本时，它将返回 null，并把 lastIndex 属性重置为 0。再调用的时候又从0开始匹配<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/ice(\d)(\d)(\d)/g</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'ice1234ice3456ice5678'</span>;</span><br><span class="line">reg.exec(str)</span><br><span class="line"><span class="comment">// ["ice123", "1", "2", "3", index: 0, input: "ice1234ice3456ice5678", groups: undefined]</span></span><br><span class="line">reg.exec(str)</span><br><span class="line"><span class="comment">// ["ice345", "3", "4", "5", index: 7, input: "ice1234ice3456ice5678", groups: undefined]</span></span><br><span class="line">reg.exec(str)</span><br><span class="line"><span class="comment">// ["ice567", "5", "6", "7", index: 14, input: "ice1234ice3456ice5678", groups: undefined]</span></span><br><span class="line">reg.exec(str)</span><br><span class="line"><span class="comment">// null</span></span><br><span class="line">reg.exec(str)</span><br><span class="line"><span class="comment">//...从新开始匹配</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<h3 id="match方法"><a href="#match方法" class="headerlink" title="match方法:"></a>match方法:</h3></blockquote>
+<p>进行全局匹配 并把匹配到的所有子串作为数组内容返回 如果没有匹配到 返回null;<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/ice(\d)(\d)(\d)/g</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'ice1234ice3456ice5678'</span>;</span><br><span class="line">str.match(reg)</span><br><span class="line"><span class="comment">// ["ice123", "ice345", "ice567"] 没有分组内容 也没有index和input属性</span></span><br></pre></td></tr></table></figure></p>
+<hr>
 <h1 id="search方法"><a href="#search方法" class="headerlink" title="search方法"></a>search方法</h1><pre><code>返回第一个满足条件的匹配结果在原字符串中的位置，如果没有匹配，则返回-1
 &quot;_x_x&quot;.search(/x/)
 注：该方法会忽略g修饰符
@@ -553,30 +523,16 @@ var r= /x/g
 r.lastIndex =2; // seacrh方法设置lastindex属性是无效的
 console.log(&apos;_x_x&apos;.search(r)) //1
 </code></pre><hr>
-<h1 id="贪婪模式"><a href="#贪婪模式" class="headerlink" title="贪婪模式:"></a>贪婪模式:</h1><pre><code>1、在匹配成功的前提下，尽可能多的去匹配
-2、量词符： *  +  ?  {n, m}  {n,}
-3、默认情况下都是最大可能匹配，即匹配直到下一个字符不满足匹配规则为止。这被称为贪婪模式.
-
-例如:
-var s = &apos;abcabcabc&apos;;
-s.match(/a.*c/g) // [&quot;abcabcabc&quot;] 结果并不是[&apos;abc&apos;, &apos;abc&apos;, &apos;abc&apos;]
-</code></pre><hr>
-<h1 id="惰性模式"><a href="#惰性模式" class="headerlink" title="惰性模式"></a>惰性模式</h1><pre><code>1、在匹配成功的前提下，尽可能少的去匹配
-2、量词符： *?  +?  ??  {n, m}?  {n,}?
-*?    重复任意次，但尽可能少重复
-+?    重复1次或更多次，但尽可能少重复
-??    重复0次或1次，但尽可能少重复
-{n,m}?    重复n到m次，但尽可能少重复
-{n,}?    重复n次以上，但尽可能少重复
-例如:
-var s = &apos;abcabcac&apos;;
-s.match(/a.*?c/g) // [&apos;abc&apos;, &apos;abc&apos;, &apos;ac&apos;]; 会匹配最短的 以a开始 以c结束 的字符串
-
-var s = &apos;abcabcabc&apos;;
-s.match(/a?/g) // 贪婪[&quot;a&quot;, &quot;&quot;, &quot;&quot;, &quot;a&quot;, &quot;&quot;, &quot;&quot;, &quot;a&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;]    
-var s = &apos;abcabcabc&apos;;
-s.match(/a??/g) // 惰性 [&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;]
-</code></pre><hr>
+<h1 id="贪婪模式"><a href="#贪婪模式" class="headerlink" title="贪婪模式:"></a>贪婪模式:</h1><p>1、在匹配成功的前提下，尽可能多的去匹配</p>
+<p>2、量词符： *  +  ?  {n, m}  {n,}</p>
+<p>3、默认情况下都是最大可能匹配，即匹配直到下一个字符不满足匹配规则为止。这被称为贪婪模式.</p>
+<p>例如:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'abcabcabc'</span>;</span><br><span class="line">s.match(<span class="regexp">/a.*c/g</span>) <span class="comment">// ["abcabcabc"] 结果并不是['abc', 'abc', 'abc']</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="惰性模式"><a href="#惰性模式" class="headerlink" title="惰性模式"></a>惰性模式</h1><p>1、在匹配成功的前提下，尽可能少的去匹配</p>
+<p>2、量词符： *?  +?  ??  {n, m}?  {n,}?</p>
+<p>*?    重复任意次，但尽可能少重复<br>+?    重复1次或更多次，但尽可能少重复<br>??    重复0次或1次，但尽可能少重复<br>{n,m}?    重复n到m次，但尽可能少重复<br>{n,}?    重复n次以上，但尽可能少重复</p>
+<p>例如:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'abcabcac'</span>;</span><br><span class="line">s.match(<span class="regexp">/a.*?c/g</span>) <span class="comment">// ['abc', 'abc', 'ac']; 会匹配最短的 以a开始 以c结束 的字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s = <span class="string">'abcabcabc'</span>;</span><br><span class="line">s.match(<span class="regexp">/.?/g</span>) </span><br><span class="line"><span class="comment">// 贪婪["a", "b", "c", "a", "b", "c", "a", "b", "c", ""]	</span></span><br><span class="line"><span class="keyword">var</span> s = <span class="string">'abcabcabc'</span>;</span><br><span class="line">s.match(<span class="regexp">/.??/g</span>) </span><br><span class="line"><span class="comment">// 惰性 ["", "", "", "", "", "", "", "", "", ""] 能不匹配就不匹配</span></span><br></pre></td></tr></table></figure></p>
+<hr>
 <h1 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h1><p>使用小括号指定一个子表达式(分组)后，匹配到这个子表达式的文本后，可以在表达式或其它程序中作进一步的处理。<br>默认情况下，每个分组会自动拥有一个组号，规则是：从左向右，以分组的左括号为标志，第一个出现的分组的组号<br>为1，第二个为2，以此类推。</p>
 <p>后向引用用于重复搜索前面某个分组匹配的文本。如过要重复搜索第一个分组匹配到的内容，可使用 <font color="red">\1</font>。</p>
 <p>例如：</p>
@@ -631,27 +587,11 @@ str.match(reg) // [&quot;hello hello&quot;]
 <p>比如<i><code>(?&lt;=\bre)\w+\b</code></i>会匹配以re开头的单词的后半部分(除了re以外的部分)，<strong>例如在查找reading a book时，它匹配ading</strong>。</p>
 <blockquote>
 <h2 id="练习题1：将1234567-变成-1-234-567"><a href="#练习题1：将1234567-变成-1-234-567" class="headerlink" title="练习题1：将1234567 变成 1,234,567"></a>练习题1：将1234567 变成 1,234,567</h2></blockquote>
-<pre><code>var str = &apos;1234567&apos;;
-var reg = /(\d{1,3})(?=(\d{3})+$)/g; // 断言\d{1,3} 后面会是以(\d{3})+ 结尾
-var res = str.replace(reg, (v, $1) =&gt; {
-    console.log($1); // $1为第一个分组 也就是(\d{1,3});
-    return v+&apos;,&apos;;
-})
-// 第一次$1为1，第二次$1为234
-// res为&quot;1,234,567&quot;
-错误用法：
-    var reg = /(\d{1,3})(?=(\d{3})+)$/g; 
-    // $符号一定要在零宽断言里，不然就会造成 既要以(\d{1,3})结尾，又要(\d{1,3})后面出现(\d{3})+)
-    实际不存在这种结果；
-</code></pre><blockquote>
-<h2 id="练习题2-用户名只能是数字和字母-并且至少有1位数字和字母，长度为8"><a href="#练习题2-用户名只能是数字和字母-并且至少有1位数字和字母，长度为8" class="headerlink" title="练习题2: 用户名只能是数字和字母 并且至少有1位数字和字母，长度为8"></a>练习题2: 用户名只能是数字和字母 并且至少有1位数字和字母，长度为8</h2><pre><code>var reg = /^(?=[a-zA-Z]*[0-9])(?=[0-9]*[a-zA-Z])[a-zA-Z0-9]{8}$/;
-</code></pre></blockquote>
-<pre><code>// ^[a-zA-Z0-9]{8}$ 表示匹配的字符串必须是长度为8,并且每个字符只能是[a-zA-Z0-9];会出现8个数字或8个字母的情况
-
-// (?=[a-zA-Z]*[0-9]) 表示必须以 0 - 7个字母 和 1个数字 开头; 限制了整个字符串中最少有一个数字
-
-// (?=[0-9]*[a-zA-Z]) 表示必须以 0 - 7个数字和 1个字母开头; 限制了整个字符串中至少有一个字母
-</code></pre><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'1234567'</span>;</span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/(\d&#123;1,3&#125;)(?=(\d&#123;3&#125;)+$)/g</span>; <span class="comment">// 断言\d&#123;1,3&#125; 后面会是以(\d&#123;3&#125;)+ 结尾</span></span><br><span class="line"><span class="keyword">var</span> res = str.replace(reg, (v, $<span class="number">1</span>) =&gt; &#123;</span><br><span class="line">	<span class="built_in">console</span>.log($<span class="number">1</span>); <span class="comment">// $1为每次匹配到的内容的第一个分组 也就是(\d&#123;1,3&#125;);</span></span><br><span class="line">	<span class="keyword">return</span> v+<span class="string">','</span>;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 第一次$1为1，第二次$1为234</span></span><br><span class="line"><span class="comment">// res为"1,234,567"</span></span><br><span class="line"></span><br><span class="line">错误用法：</span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/(\d&#123;1,3&#125;)(?=(\d&#123;3&#125;)+)$/g</span>; </span><br><span class="line"><span class="comment">// $符号一定要在零宽断言里，不然就会造成 既要以(\d&#123;1,3&#125;)结尾，又要(\d&#123;1,3&#125;)后面出现(\d&#123;3&#125;)+)</span></span><br><span class="line"><span class="comment">// 实际不存在这种情况；</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="练习题2-用户名只能是数字和字母-并且至少有1位数字和字母，长度为8"><a href="#练习题2-用户名只能是数字和字母-并且至少有1位数字和字母，长度为8" class="headerlink" title="练习题2: 用户名只能是数字和字母 并且至少有1位数字和字母，长度为8"></a>练习题2: 用户名只能是数字和字母 并且至少有1位数字和字母，长度为8</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/^(?=[a-zA-Z]*[0-9])(?=[0-9]*[a-zA-Z])[a-zA-Z0-9]&#123;8&#125;$/</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ^[a-zA-Z0-9]&#123;8&#125;$ 表示匹配的字符串必须是长度为8,并且每个字符只能是[a-zA-Z0-9];会出现8个数字或8个字母的情况</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ^(?=[a-zA-Z]*[0-9]) 表示必须以 0 - 7个字母 并且后面跟1个数字 开头; 限制了整个字符串中最少有一个数字</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ^(?=[0-9]*[a-zA-Z]) 表示必须以 0 - 7个数字 并且后面跟1个字母 开头; 限制了整个字符串中至少有一个字母</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'923abc12'</span>;</span><br><span class="line"><span class="number">1</span>、 满足^[a-zA-Z0<span class="number">-9</span>]&#123;<span class="number">8</span>&#125;$ </span><br><span class="line"><span class="number">2</span>、 <span class="number">0</span>个字母 后面跟 <span class="number">1</span>个数字<span class="number">9</span>开头 满足^(?=[a-zA-Z]*[<span class="number">0</span><span class="number">-9</span>]) </span><br><span class="line"><span class="number">3</span>、 <span class="number">3</span>个数字 后面跟 <span class="number">1</span>个字母a开头 满足^(?=[<span class="number">0</span><span class="number">-9</span>]*[a-zA-Z])</span><br><span class="line">reg.test(str) <span class="comment">// true;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<hr>
 <p></p>
 
       
@@ -837,7 +777,7 @@ var res = str.replace(reg, (v, $1) =&gt; {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用字符操作"><span class="nav-number">1.</span> <span class="nav-text">常用字符操作:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则："><span class="nav-number">2.</span> <span class="nav-text">正则：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建正则对象"><span class="nav-number">3.</span> <span class="nav-text">创建正则对象:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转义符："><span class="nav-number">4.</span> <span class="nav-text">转义符： \</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用："><span class="nav-number">4.1.</span> <span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符转义：-为了描述"><span class="nav-number">4.2.</span> <span class="nav-text">字符转义：    为了描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则也有转义：-为了简化"><span class="nav-number">4.3.</span> <span class="nav-text">正则也有转义：        为了简化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#选项-xx-选项"><span class="nav-number">5.</span> <span class="nav-text">选项: /xx/选项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#量词："><span class="nav-number">6.</span> <span class="nav-text">量词：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方括号"><span class="nav-number">7.</span> <span class="nav-text">方括号:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组："><span class="nav-number">8.</span> <span class="nav-text">分组：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分枝条件"><span class="nav-number">9.</span> <span class="nav-text">分枝条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修饰："><span class="nav-number">10.</span> <span class="nav-text">修饰：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公共特性："><span class="nav-number">11.</span> <span class="nav-text">公共特性：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#match和exec方法"><span class="nav-number">12.</span> <span class="nav-text">match和exec方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则中没有g的情况："><span class="nav-number">12.1.</span> <span class="nav-text">正则中没有g的情况：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则中如果有g的情况-："><span class="nav-number">12.2.</span> <span class="nav-text">正则中如果有g的情况 ：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#search方法"><span class="nav-number">13.</span> <span class="nav-text">search方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#贪婪模式"><span class="nav-number">14.</span> <span class="nav-text">贪婪模式:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#惰性模式"><span class="nav-number">15.</span> <span class="nav-text">惰性模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后向引用"><span class="nav-number">16.</span> <span class="nav-text">后向引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分理解："><span class="nav-number">16.1.</span> <span class="nav-text">拆分理解：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用分组语法："><span class="nav-number">16.2.</span> <span class="nav-text">常用分组语法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获："><span class="nav-number">16.2.1.</span> <span class="nav-text">捕获：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#零宽断言："><span class="nav-number">16.2.2.</span> <span class="nav-text">零宽断言：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#零宽断言"><span class="nav-number">17.</span> <span class="nav-text">零宽断言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题1：将1234567-变成-1-234-567"><span class="nav-number">17.1.</span> <span class="nav-text">练习题1：将1234567 变成 1,234,567</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题2-用户名只能是数字和字母-并且至少有1位数字和字母，长度为8"><span class="nav-number">17.2.</span> <span class="nav-text">练习题2: 用户名只能是数字和字母 并且至少有1位数字和字母，长度为8</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用字符操作"><span class="nav-number">1.</span> <span class="nav-text">常用字符操作:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则："><span class="nav-number">2.</span> <span class="nav-text">正则：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建正则对象"><span class="nav-number">3.</span> <span class="nav-text">创建正则对象:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#转义符："><span class="nav-number">4.</span> <span class="nav-text">转义符： \</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用："><span class="nav-number">4.1.</span> <span class="nav-text">作用：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符转义：-为了描述"><span class="nav-number">4.2.</span> <span class="nav-text">字符转义：    为了描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则也有转义：-为了简化"><span class="nav-number">4.3.</span> <span class="nav-text">正则也有转义：        为了简化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#选项-xx-选项"><span class="nav-number">5.</span> <span class="nav-text">选项: /xx/选项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#量词："><span class="nav-number">6.</span> <span class="nav-text">量词：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方括号"><span class="nav-number">7.</span> <span class="nav-text">方括号:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组："><span class="nav-number">8.</span> <span class="nav-text">分组：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分枝条件"><span class="nav-number">9.</span> <span class="nav-text">分枝条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修饰："><span class="nav-number">10.</span> <span class="nav-text">修饰：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#match和exec方法"><span class="nav-number">11.</span> <span class="nav-text">match和exec方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则中没有g的情况："><span class="nav-number">11.1.</span> <span class="nav-text">正则中没有g的情况：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则中如果有g的情况-："><span class="nav-number">11.2.</span> <span class="nav-text">正则中如果有g的情况 ：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exec方法"><span class="nav-number">11.2.1.</span> <span class="nav-text">exec方法:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#match方法"><span class="nav-number">11.2.2.</span> <span class="nav-text">match方法:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#search方法"><span class="nav-number">12.</span> <span class="nav-text">search方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#贪婪模式"><span class="nav-number">13.</span> <span class="nav-text">贪婪模式:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#惰性模式"><span class="nav-number">14.</span> <span class="nav-text">惰性模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后向引用"><span class="nav-number">15.</span> <span class="nav-text">后向引用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拆分理解："><span class="nav-number">15.1.</span> <span class="nav-text">拆分理解：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用分组语法："><span class="nav-number">15.2.</span> <span class="nav-text">常用分组语法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获："><span class="nav-number">15.2.1.</span> <span class="nav-text">捕获：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#零宽断言："><span class="nav-number">15.2.2.</span> <span class="nav-text">零宽断言：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#零宽断言"><span class="nav-number">16.</span> <span class="nav-text">零宽断言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题1：将1234567-变成-1-234-567"><span class="nav-number">16.1.</span> <span class="nav-text">练习题1：将1234567 变成 1,234,567</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习题2-用户名只能是数字和字母-并且至少有1位数字和字母，长度为8"><span class="nav-number">16.2.</span> <span class="nav-text">练习题2: 用户名只能是数字和字母 并且至少有1位数字和字母，长度为8</span></a></li></ol></li></ol></div>
             
 
           </div>
